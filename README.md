@@ -1,0 +1,1 @@
+The issue is recognizing a geometric figure drawn by a person in the air in front of the camera
