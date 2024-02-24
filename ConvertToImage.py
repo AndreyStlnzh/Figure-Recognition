@@ -20,16 +20,16 @@ class ConvertToImage():
         for i in range(len(figure)):
             res_figure[i] = (figure[i][0] - min_x, figure[i][1] - min_y)
 
-        koef_x = WIDTH / max([i[0] for i in res_figure])
-        koef_y = WIDTH / max([i[1] for i in res_figure])
+        koef_x = (WIDTH - 6) / max([i[0] for i in res_figure])
+        koef_y = (WIDTH - 6) / max([i[1] for i in res_figure])
 
         koef = koef_x if koef_x <= koef_y else koef_y
 
         for i in range(len(figure)):
             if integer:
-                res_figure[i] = (int(res_figure[i][0] * koef), int(res_figure[i][1] * koef))
+                res_figure[i] = (int(res_figure[i][0] * koef + 2), int(res_figure[i][1] * koef + 2))
             else:
-                res_figure[i] = (res_figure[i][0] * koef, res_figure[i][1] * koef)
+                res_figure[i] = (res_figure[i][0] * koef + 2, res_figure[i][1] * koef + 2)
         
         if center:
             center = ((center[0] - min_x) * koef, (center[1] - min_y) * koef)

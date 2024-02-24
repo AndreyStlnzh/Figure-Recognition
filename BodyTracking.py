@@ -10,6 +10,7 @@ import numpy as np
 
 from keypoints import *
 
+POINT = RIGHT_HAND_INDEX_1
 
 class LogWriter:
     detection_result_size = 33
@@ -123,7 +124,6 @@ class BodyTracking:
         # self.body_runtime_param.measure3D_reference_frame = sl.REFERENCE_FRAME.WORLD
         # self.runtime_params.measure3D_reference_frame = sl.REFERENCE_FRAME.WORLD
 
-
         # Get ZED camera information
         camera_info = self.zed.get_camera_information()
         calibration_params = camera_info.camera_configuration.calibration_parameters
@@ -196,7 +196,7 @@ class BodyTracking:
         timestamp = 0
 
         prev_points = [None] * 60
-        point = RIGHT_WRIST
+        
 
         while self.viewer.is_available():
 
@@ -219,7 +219,7 @@ class BodyTracking:
                         [20, 20], 
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2, cv2.LINE_AA)
 
-                    bb = child_body.bounding_box_2d
+                    # bb = child_body.bounding_box_2d
                     # cv2.rectangle(self.image.get_data(), (int(bb[0][0]*self.image_scale[0]), int(bb[0][1]*self.image_scale[1])), \
                     #             (int(bb[2][0]*self.image_scale[0]), int(bb[2][1]*self.image_scale[1])), (102,255,102), 6)
                 
@@ -229,8 +229,8 @@ class BodyTracking:
 
                     
                     prev_points.pop(0)
-                    if keypoint_2d[point][0] >= 0:
-                        prev_points.append(keypoint_2d[point])
+                    if keypoint_2d[POINT][0] >= 0:
+                        prev_points.append(keypoint_2d[POINT])
                     else:
                         prev_points.append(None)
 
